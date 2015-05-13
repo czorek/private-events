@@ -1,0 +1,13 @@
+<h1>Event info</h1>
+
+<p>
+  <b>Created by:</b>
+  <%= User.find(@event.creator_id).name %>
+</p>
+
+<h4>Attendees:</h4>
+  <% @event.attendees.each do |attendee| %>
+    <p>
+      <%= attendee.name %>
+    </p>
+  <% end %>

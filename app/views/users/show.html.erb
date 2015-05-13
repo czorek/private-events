@@ -6,8 +6,30 @@
     <th>Email</th>
   </tr>
   <tr>
-    <td><%= @user.name %></td>
+    <td><%= @user.name %> | </td>
     <td><%= @user.email %></td>
+  </tr>
+  <tr>
   </tr>
 </table>
 
+<% unless @user.created_events.empty? %>
+  <h4>Created events:</h4>
+    <%= render partial: "shared/events", locals: { events: @user.created_events } %>
+<% else %>
+  <h4>No created events.</h4> 
+<% end %>
+
+<% unless @previous_events.empty? %>
+  <h4>Previous events:</h4>
+    <%= render partial: "shared/events", locals: { events: @user.previous_events } %>
+<% else %>
+  <h4>No previous events.</h4> 
+<% end %>
+
+<% unless @upcoming_events.empty? %>
+  <h4>Upcoming events:</h4>
+    <%= render partial: "shared/events", locals: { events: @user.upcoming_events } %>
+<% else %>
+  <h4>No upcoming events.</h4> 
+<% end %>

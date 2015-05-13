@@ -1,0 +1,8 @@
+<% events.each do |event| %>
+  <% unless event.nil? %>
+    <p>
+      <%= event.time %>, 
+      <%= event.description %>
+    </p>
+  <% end %>
+<% end %>

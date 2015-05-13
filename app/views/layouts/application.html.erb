@@ -7,20 +7,32 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if logged_in? %>
-    Currently logged in user: <%= User.find(session[:user_id]).name %>
-  <% end %>
+  <p>
+    <% unless logged_in? %>
+      <%= link_to "Log in", login_path  %>
+    <% end %>
 
+    <% if logged_in? %>
+      <%= link_to "New event", new_event_path %>
+      <%= link_to "Log out", logout_path, :method => :delete %>
+      <%= link_to "All events", events_path %>
+      <%= link_to "My profile", user_path(session[:user_id]) %>
+    <% end %>
+  </p>
+
+  <% if logged_in? %>
+    <p>
+      Currently logged in user: <%= User.find(session[:user_id]).name %>
+    </p>
+  <% end %>
+  
+
+  <% flash.each do |message_type, message| %>
+    <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+  <% end %>
 
 <%= yield %>
 
-  <% unless logged_in? %>
-    <%= link_to "Log in", login_path  %>
-  <% end %>
-
-  <% if logged_in? %>
-    <%= link_to "Log out", logout_path, :method => :delete %>
-  <% end %>
-
+  <%= debug(params) if Rails.env.development? %>
 </body>
 </html>
